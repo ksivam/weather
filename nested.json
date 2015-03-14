@@ -6,7 +6,7 @@
       "apiVersion": "2014-04-01",
       "properties": {
         "templateLink": {
-          "uri": ""
+          "uri": "https://raw.githubusercontent.com/ksivam/weather/master/linked.json"
         },
         "parameters": {
           "firewallRules": {
