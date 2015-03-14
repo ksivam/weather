@@ -1,0 +1,20 @@
+{
+  "resources": [
+    {
+      "name": "FirewallProvisioning",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2014-04-01",
+      "properties": {
+        "templateLink": {
+          "uri": ""
+        },
+        "parameters": {
+          "firewallRules": {
+            "value": "[parameters('firewallRules')]"
+          }
+        },
+        "mode": "Incremental"
+      }
+    }
+  ]
+}
