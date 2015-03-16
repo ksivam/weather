@@ -27,11 +27,11 @@
         },
         "serverName": {
           "type": "string",
-          "defaultValue": "some-server-kri12"
+          "defaultValue": "samp-k-server"
         },
         "serverLocation": {
           "type": "string",
-          "defaultValue": "North Europe"
+          "defaultValue": "North Central US"
         }
       },
       "resources": [
