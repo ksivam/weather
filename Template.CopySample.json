@@ -30,4 +30,40 @@
         }
       ],
       "outputs": {}
+    },
+
+"parameters": {
+"databases": {
+  "type": "array",
+  "defaultValue": [
+  {
+    "serverName": "server-name",
+    "databaseName": "db-name",
+    .......
+  }
+  ]
+},
+"count": {
+  "type": "int",
+  "defaultValue": 1
+}
+  },
+
+  "resources": [
+    {
+      "name": "[concat((parameters('databases')[copyIndex()]).serverName, '/', (parameters('databases')[copyIndex()]).databaseName)]",
+      "location": "[parameters('serverLocation')]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2014-04-01-preview",            
+      "properties": {
+        "collation": "[(parameters('databases')[copyIndex()]).collation]",
+        "edition": "[(parameters('databases')[copyIndex()]).edition]",
+        "maxSizeBytes": "[(parameters('databases')[copyIndex()]).maxSizeBytes]",
+        "requestedServiceObjectiveId": "[(parameters('databases')[copyIndex()]).requestedServiceObjectiveId]"
+      },
+      "copy": {
+        "name": "provisionDatabases",
+        "count": "[parameters('count')]"
+      }
     }
+  ]    
