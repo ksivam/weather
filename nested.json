@@ -31,16 +31,18 @@
     "mode": "Incremental",
     "parameters": {
       "childParameter": {
-        "value": [{
-          "databaseName": {
-            "value": "krishna-dfb"
-          }
+        "value": [
+          {
+            "databaseName": {
+              "value": "krishna-dfb"
+            }
           },
           {
-          "databaseName": {
-            "value": "krishna-db3"
+            "databaseName": {
+              "value": "krishna-db3"
+            }
           }
-          }]
+        ]
       }
     }
   }

@@ -29,6 +29,9 @@
     "serverLocation": {
       "type": "string",
       "defaultValue": "North Central US"
+    },
+    "subParameterName": {
+      "type": "object"
     }
   },
   "resources": [
