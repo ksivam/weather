@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 {
   "properties": {
     "template": {
@@ -30,19 +26,11 @@
         },
         "serverName": {
           "type": "string",
-<<<<<<< HEAD
-          "defaultValue": "some-server-kri12"
-        },
-        "serverLocation": {
-          "type": "string",
-          "defaultValue": "North Europe"
-=======
           "defaultValue": "samp-k-server"
         },
         "serverLocation": {
           "type": "string",
           "defaultValue": "North Central US"
->>>>>>> origin/master
         }
       },
       "resources": [
@@ -62,8 +50,4 @@
     },
     "mode": "Incremental"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master
