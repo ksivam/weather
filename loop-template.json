@@ -23,7 +23,7 @@
               "serverName": "samp-k-server",
               "serverLocation": "North Central US",
               "ruleName": "firewallRule-2",
-              "startIpAddress": "2.2.2.2",
+              "startIpAddress": "5.2.2.2",
               "endIpAddress": "3.4.4.4"
             }
           ]
