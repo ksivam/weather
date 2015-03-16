@@ -10,7 +10,7 @@
           "defaultValue": [
             {
               "serverName": "samp-k-server",
-              "databaseName": "db-name-2",
+              "databaseName": "db-name-5",
               "collation": "SQL_Latin1_General_CP1_CI_AS",
               "edition": "Basic",
               "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
@@ -19,7 +19,7 @@
             },
             {
               "serverName": "samp-k-server",
-              "databaseName": "db-name-3",
+              "databaseName": "db-name-6",
               "collation": "SQL_Latin1_General_CP1_CI_AS",
               "edition": "Basic",
               "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
@@ -30,7 +30,7 @@
         },
         "count": {
           "type": "int",
-          "defaultValue": 1
+          "defaultValue": 2
         }
       },
       "variables": {},
