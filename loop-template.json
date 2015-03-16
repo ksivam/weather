@@ -1,0 +1,48 @@
+{
+  "properties": {
+    "mode": "Incremental",
+    "template": {
+      "$schema": "http://schemas.management.azure.com/deploymentTemplate?api-version=2015-01-01",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "databases": {
+          "type": "object",
+          "defaultValue": [
+            {
+              "serverName": "samp-k-server",
+              "databaseName": "db-name-1",
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "edition": "Basic",
+              "requestedServiceObjectiveId": "910b4fcb-8a29-4c3e-958f-f7ba794388b2",
+              "maxSizeBytes": "1073741824",
+              "serverLocation": "North Central US"
+            }
+          ]
+        },
+        "count": {
+          "type": "int",
+          "defaultValue": 1
+        }
+      },
+      "variables": {},
+      "resources": [
+        {
+          "name": "[concat((parameters('databases')[copyIndex()]).serverName, '/', (parameters('databases')[copyIndex()]).databaseName)]",
+          "location": "[(parameters('databases')[copyIndex()]).serverLocation]",
+          "type": "Microsoft.Sql/servers/databases",
+          "apiVersion": "2014-04-01-preview",
+          "properties": {
+            "collation": "[(parameters('databases')[copyIndex()]).collation]",
+            "edition": "[(parameters('databases')[copyIndex()]).edition]",
+            "maxSizeBytes": "[(parameters('databases')[copyIndex()]).maxSizeBytes]",
+            "requestedServiceObjectiveId": "[(parameters('databases')[copyIndex()]).requestedServiceObjectiveId]"
+          },
+          "copy": {
+            "name": "provisionDatabases",
+            "count": "[parameters('count')]"
+          }
+        }
+      ]
+    }
+  }
+}

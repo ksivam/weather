@@ -37,9 +37,13 @@
   "type": "array",
   "defaultValue": [
   {
-    "serverName": "server-name",
-    "databaseName": "db-name",
-    .......
+    "serverName": "samp-k-server",
+    "databaseName": "db-name-1",
+    "collation": "SQL_Latin1_General_CP1_CI_AS",
+    "edition": "Basic",
+    "requestedServiceObjectiveId": "910b4fcb-8a29-4c3e-958f-f7ba794388b2",
+    "maxSizeBytes": "1073741824",
+    "serverLocation": "North Central US"
   }
   ]
 },
@@ -52,7 +56,7 @@
   "resources": [
     {
       "name": "[concat((parameters('databases')[copyIndex()]).serverName, '/', (parameters('databases')[copyIndex()]).databaseName)]",
-      "location": "[parameters('serverLocation')]",
+      "location": "[(parameters('databases')[copyIndex()]).serverLocation]",
       "type": "Microsoft.Sql/servers/databases",
       "apiVersion": "2014-04-01-preview",            
       "properties": {
