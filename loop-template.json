@@ -5,12 +5,35 @@
       "$schema": "http://schemas.management.azure.com/deploymentTemplate?api-version=2015-01-01",
       "contentVersion": "1.0.0.0",
       "parameters": {
+        "firewallRulesCount": {
+          "type": "int",
+          "defaultValue": 2
+        },
+        "firewallRules": {
+          "type": "array",
+          "defaultValue": [
+            {
+              "serverName": "samp-k-server",
+              "serverLocation": "North Central US",
+              "ruleName": "firewallRule-1",
+              "startIpAddress": "0.0.0.0",
+              "endIpAddress": "1.1.1.1"
+            },
+            {
+              "serverName": "samp-k-server",
+              "serverLocation": "North Central US",
+              "ruleName": "firewallRule-2",
+              "startIpAddress": "2.2.2.2",
+              "endIpAddress": "3.4.4.4"
+            }
+          ]
+        },
         "databases": {
           "type": "array",
           "defaultValue": [
             {
               "serverName": "samp-k-server",
-              "databaseName": "db-name-5",
+              "databaseName": "db-name-19",
               "collation": "SQL_Latin1_General_CP1_CI_AS",
               "edition": "Basic",
               "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
@@ -19,16 +42,16 @@
             },
             {
               "serverName": "samp-k-server",
-              "databaseName": "db-name-6",
+              "databaseName": "db-name-21",
               "collation": "SQL_Latin1_General_CP1_CI_AS",
               "edition": "Basic",
               "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
               "maxSizeBytes": "1073741824",
               "serverLocation": "North Central US"
-            }            
+            }
           ]
         },
-        "count": {
+        "databasesCount": {
           "type": "int",
           "defaultValue": 2
         }
@@ -36,6 +59,21 @@
       "variables": {},
       "resources": [
         {
+          "name": "[concat(parameters('firewallRules')[copyIndex()].serverName, '/', parameters('firewallRules')[copyIndex()].ruleName)]",
+          "location": "[parameters('firewallRules')[copyIndex()].serverLocation]",
+          "type": "Microsoft.Sql/servers/firewallrules",
+          "apiVersion": "2014-04-01-preview",
+          "properties": {
+            "startIpAddress": "[parameters('firewallRules')[copyIndex()].startIpAddress]",
+            "endIpAddress": "[parameters('firewallRules')[copyIndex()].endIpAddress]"
+          },
+          "copy": {
+            "name": "provisionFirewallRules",
+            "count": "[parameters('firewallRulesCount')]"
+          }
+        },
+        {
+          "dependsOn": ["provisionFirewallRules"],
           "name": "[concat(parameters('databases')[copyIndex()].serverName, '/', parameters('databases')[copyIndex()].databaseName)]",
           "location": "[parameters('databases')[copyIndex()].serverLocation]",
           "type": "Microsoft.Sql/servers/databases",
@@ -48,7 +86,7 @@
           },
           "copy": {
             "name": "provisionDatabases",
-            "count": "[parameters('count')]"
+            "count": "[parameters('databasesCount')]"
           }
         }
       ]
