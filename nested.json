@@ -1,20 +1,47 @@
 {
-  "resources": [
-    {
-      "name": "FirewallProvisioning",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2014-04-01",
-      "properties": {
-        "templateLink": {
-          "uri": "https://raw.githubusercontent.com/ksivam/weather/master/linked.json"
-        },
-        "parameters": {
-          "firewallRules": {
-            "value": "[parameters('firewallRules')]"
+  "properties": {
+    "template": {
+      "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "childParameter": {
+          "type": "array"
+        }
+      },
+      "resources": [
+        {
+          "name": "sub-deployment",
+          "type": "Microsoft.Resources/deployments",
+          "apiVersion": "2015-01-01",
+          "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+              "uri": "https://raw.githubusercontent.com/ksivam/weather/master/linked.json",
+              "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+              "subParameterName": {
+                "value": "[parameters('childParameter')]"
+              }
+            }
           }
-        },
-        "mode": "Incremental"
+        }
+      ]
+    },
+    "mode": "Incremental",
+    "parameters": {
+      "childParameter": {
+        "value": [{
+          "databaseName": {
+            "value": "krishna-dfb"
+          }
+          },
+          {
+          "databaseName": {
+            "value": "krishna-db3"
+          }
+          }]
       }
     }
-  ]
+  }
 }
