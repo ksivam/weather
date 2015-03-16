@@ -6,17 +6,26 @@
       "contentVersion": "1.0.0.0",
       "parameters": {
         "databases": {
-          "type": "object",
+          "type": "array",
           "defaultValue": [
             {
               "serverName": "samp-k-server",
-              "databaseName": "db-name-1",
+              "databaseName": "db-name-2",
               "collation": "SQL_Latin1_General_CP1_CI_AS",
               "edition": "Basic",
-              "requestedServiceObjectiveId": "910b4fcb-8a29-4c3e-958f-f7ba794388b2",
+              "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
               "maxSizeBytes": "1073741824",
               "serverLocation": "North Central US"
-            }
+            },
+            {
+              "serverName": "samp-k-server",
+              "databaseName": "db-name-3",
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "edition": "Basic",
+              "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
+              "maxSizeBytes": "1073741824",
+              "serverLocation": "North Central US"
+            }            
           ]
         },
         "count": {
@@ -27,15 +36,15 @@
       "variables": {},
       "resources": [
         {
-          "name": "[concat((parameters('databases')[copyIndex()]).serverName, '/', (parameters('databases')[copyIndex()]).databaseName)]",
-          "location": "[(parameters('databases')[copyIndex()]).serverLocation]",
+          "name": "[concat(parameters('databases')[copyIndex()].serverName, '/', parameters('databases')[copyIndex()].databaseName)]",
+          "location": "[parameters('databases')[copyIndex()].serverLocation]",
           "type": "Microsoft.Sql/servers/databases",
           "apiVersion": "2014-04-01-preview",
           "properties": {
-            "collation": "[(parameters('databases')[copyIndex()]).collation]",
-            "edition": "[(parameters('databases')[copyIndex()]).edition]",
-            "maxSizeBytes": "[(parameters('databases')[copyIndex()]).maxSizeBytes]",
-            "requestedServiceObjectiveId": "[(parameters('databases')[copyIndex()]).requestedServiceObjectiveId]"
+            "collation": "[parameters('databases')[copyIndex()].collation]",
+            "edition": "[parameters('databases')[copyIndex()].edition]",
+            "maxSizeBytes": "[parameters('databases')[copyIndex()].maxSizeBytes]",
+            "requestedServiceObjectiveId": "[parameters('databases')[copyIndex()].requestedServiceObjectiveId]"
           },
           "copy": {
             "name": "provisionDatabases",
