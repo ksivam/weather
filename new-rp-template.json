@@ -3,54 +3,16 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "firewallRulesCount": {
-      "type": "int",
-      "defaultValue": 2
+      "type": "int"
     },
     "firewallRules": {
-      "type": "array",
-      "defaultValue": [
-        {
-          "serverName": "samp-k-server",
-          "serverLocation": "North Central US",
-          "ruleName": "firewallRule-1",
-          "startIpAddress": "0.0.0.0",
-          "endIpAddress": "1.1.1.1"
-        },
-        {
-          "serverName": "samp-k-server",
-          "serverLocation": "North Central US",
-          "ruleName": "firewallRule-2",
-          "startIpAddress": "5.2.2.2",
-          "endIpAddress": "3.4.4.4"
-        }
-      ]
+      "type": "array"
     },
     "databases": {
-      "type": "array",
-      "defaultValue": [
-        {
-          "serverName": "samp-k-server",
-          "databaseName": "db-name-19",
-          "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "edition": "Basic",
-          "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-          "maxSizeBytes": "1073741824",
-          "serverLocation": "North Central US"
-        },
-        {
-          "serverName": "samp-k-server",
-          "databaseName": "db-name-21",
-          "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "edition": "Basic",
-          "requestedServiceObjectiveId": "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-          "maxSizeBytes": "1073741824",
-          "serverLocation": "North Central US"
-        }
-      ]
+      "type": "array"
     },
     "databasesCount": {
-      "type": "int",
-      "defaultValue": 2
+      "type": "int"
     }
   },
   "variables": {},
