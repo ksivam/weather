@@ -23,3 +23,9 @@ setup- run as sudo or admin:
 
 - show all resources under a resource group
 -- azure group show Group-1
+
+- get server resource
+-- azure resource show Group-1 testausservert  Microsoft.Sql/servers 2014-04-01-preview
+
+- get db resource
+-- azure resource show Group-1 testausdb  Microsoft.Sql/servers/databases 2014-04-01-preview --parent servers/testausservert
