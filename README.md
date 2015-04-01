@@ -17,3 +17,9 @@ setup- run as sudo or admin:
 
 - logout
 -- azure logout -u <username>
+
+- show all resource goups under subscription
+-- azure group list
+
+- show all resources under a resource group
+-- azure group show Group-1
