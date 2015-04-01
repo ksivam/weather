@@ -30,8 +30,13 @@ setup- run as sudo or admin:
 - get db resource
 -- azure resource show Group-1 testausdb  Microsoft.Sql/servers/databases 2014-04-01-preview --parent servers/testausservert
 
-Files which perform get operation
-=================================
+Files which generates bearer token
+==================================
+- lib/util/authentication/AccessTokenCloudCredentials.js
+- lib/util/authentication/adalAuth.js
+
+Files which perform get operation on resources
+==============================================
 - node-modules/azure-mgmt-resource/lib
 --ResourceManagementClient.js
 - node-modules/azure-mgmt-authorization/lib
