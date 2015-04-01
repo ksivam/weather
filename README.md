@@ -41,3 +41,7 @@ Files which perform get operation on resources
 --ResourceManagementClient.js
 - node-modules/azure-mgmt-authorization/lib
 -- AuthorizationManagementClient.js
+
+sublime custom add-ins
+======================
+- http://clarknikdelpowell.com/blog/creating-sublime-text-3-plugins-part-1/
