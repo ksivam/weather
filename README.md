@@ -2,6 +2,7 @@ setup- run as sudo or admin:
 - Install node which gives npm also
 -- sudo curl -O -L https://npmjs.org/install.sh
 -- sudo sh install.sh
+-- http://brew.sh/
 
 - And the get latest npm 
 -- sudo npm install npm -g
