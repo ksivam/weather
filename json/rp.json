@@ -1,0 +1,54 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "firewallRulesCount": {
+      "type": "int"
+    },
+    "firewallRules": {
+      "type": "array"
+    },
+    "databases": {
+      "type": "array"
+    },
+    "databasesCount": {
+      "type": "int"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "name": "[concat(parameters('firewallRules')[copyIndex()].serverName, '/', parameters('firewallRules')[copyIndex()].ruleName)]",
+      "location": "[parameters('firewallRules')[copyIndex()].serverLocation]",
+      "type": "Microsoft.Sql/servers/firewallrules",
+      "apiVersion": "2014-04-01-preview",
+      "properties": {
+        "startIpAddress": "[parameters('firewallRules')[copyIndex()].startIpAddress]",
+        "endIpAddress": "[parameters('firewallRules')[copyIndex()].endIpAddress]"
+      },
+      "copy": {
+        "name": "provisionFirewallRules",
+        "count": "[parameters('firewallRulesCount')]"
+      }
+    },
+    {
+      "dependsOn": [
+        "provisionFirewallRules"
+      ],
+      "name": "[concat(parameters('databases')[copyIndex()].serverName, '/', parameters('databases')[copyIndex()].databaseName)]",
+      "location": "[parameters('databases')[copyIndex()].serverLocation]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2014-04-01-preview",
+      "properties": {
+        "collation": "[parameters('databases')[copyIndex()].collation]",
+        "edition": "[parameters('databases')[copyIndex()].edition]",
+        "maxSizeBytes": "[parameters('databases')[copyIndex()].maxSizeBytes]",
+        "requestedServiceObjectiveId": "[parameters('databases')[copyIndex()].requestedServiceObjectiveId]"
+      },
+      "copy": {
+        "name": "provisionDatabases",
+        "count": "[parameters('databasesCount')]"
+      }
+    }
+  ]
+}
