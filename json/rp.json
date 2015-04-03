@@ -42,7 +42,7 @@
       "type": "Microsoft.Sql/servers/resourcepools",
       "apiVersion": "2014-04-01-preview",
       "properties": {
-        "databaseEdition": "[parameters('resourcePoolEdition')]",
+        "edition": "[parameters('resourcePoolEdition')]",
         "dtuGuarantee": "[parameters('dtuGuarantee')]",
         "databaseDtuGuarantee": "[parameters('databaseDtuGuarantee')]",
         "databaseDtuCap": "[parameters('databaseDtuCap')]",
