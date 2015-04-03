@@ -18,17 +18,16 @@
   "variables": {},
   "resources": [
     {
-      "name": "[concat(parameters('firewallRules')[copyIndex()].serverName, '/', parameters('firewallRules')[copyIndex()].ruleName)]",
-      "location": "[parameters('firewallRules')[copyIndex()].serverLocation]",
-      "type": "Microsoft.Sql/servers/firewallrules",
+      "name": "[concat(parameters('serverName'), '/', parameters('resourcePoolName'))]",
+      "location": "[parameters('serverLocation')]",
+      "type": "Microsoft.Sql/servers/resourcepools",
       "apiVersion": "2014-04-01-preview",
       "properties": {
-        "startIpAddress": "[parameters('firewallRules')[copyIndex()].startIpAddress]",
-        "endIpAddress": "[parameters('firewallRules')[copyIndex()].endIpAddress]"
-      },
-      "copy": {
-        "name": "provisionFirewallRules",
-        "count": "[parameters('firewallRulesCount')]"
+        "databaseEdition": "[parameters('databaseEdition')]",
+        "dtuGuarantee": "[parameters('dtuGuarantee')]",
+        "databaseDtuGuarantee": "[parameters('databaseDtuGuarantee')]",
+        "databaseDtuCap": "[parameters('databaseDtuCap')]",
+        "storageLimitInGB": "[parameters('storageLimitInGB')]"
       }
     },
     {
