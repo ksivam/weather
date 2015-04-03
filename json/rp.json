@@ -54,6 +54,7 @@
          "[concat('Microsoft.Sql/servers/resourcepools/', parameters('resourcePoolName'))]"
       ],
       "name": "[concat(parameters('serverName'), '/', parameters('databases')[copyIndex()].databaseName)]",
+      "location": "[parameters('serverLocation')]",
       "type": "Microsoft.Sql/servers/databases",
       "apiVersion": "2014-04-01-preview",
       "properties": {
