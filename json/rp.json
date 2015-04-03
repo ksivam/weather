@@ -2,17 +2,36 @@
   "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "firewallRulesCount": {
-      "type": "int"
+    "serverName": {
+      "type": "string"
     },
-    "firewallRules": {
-      "type": "array"
+    "serverLocation": {
+      "type": "string"
     },
-    "databases": {
-      "type": "array"
+    "resourcePoolName": {
+      "type": "string"
+    },
+    "resourcePoolEdition": {
+      "type": "string",
+      "defaultValue": "Standard"
+    },
+    "dtuGuarantee": {
+      "type": "string"
+    },
+    "databaseDtuGuarantee": {
+      "type": "string"
+    },
+    "databaseDtuCap": {
+      "type": "string"
+    },
+    "storageLimitInGB": {
+      "type": "string"
     },
     "databasesCount": {
       "type": "int"
+    },
+    "databases": {
+      "type": "array"
     }
   },
   "variables": {},
@@ -23,7 +42,7 @@
       "type": "Microsoft.Sql/servers/resourcepools",
       "apiVersion": "2014-04-01-preview",
       "properties": {
-        "databaseEdition": "[parameters('databaseEdition')]",
+        "databaseEdition": "[parameters('resourcePoolEdition')]",
         "dtuGuarantee": "[parameters('dtuGuarantee')]",
         "databaseDtuGuarantee": "[parameters('databaseDtuGuarantee')]",
         "databaseDtuCap": "[parameters('databaseDtuCap')]",
