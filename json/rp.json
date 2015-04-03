@@ -43,10 +43,10 @@
       "apiVersion": "2014-04-01-preview",
       "properties": {
         "edition": "[parameters('resourcePoolEdition')]",
-        "dtuGuarantee": [parameters('dtuGuarantee')],
-        "databaseDtuGuarantee": [parameters('databaseDtuGuarantee')],
-        "databaseDtuCap": [parameters('databaseDtuCap')],
-        "storageLimitInGB": [parameters('storageLimitInGB')]
+        "dtuGuarantee": "[parameters('dtuGuarantee')]",
+        "databaseDtuGuarantee": "[parameters('databaseDtuGuarantee')]",
+        "databaseDtuCap": "[parameters('databaseDtuCap')]",
+        "storageLimitInGB": "[parameters('storageLimitInGB')]"
       }
     },
     {
