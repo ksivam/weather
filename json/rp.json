@@ -51,7 +51,7 @@
     },
     {
       "dependsOn": [
-         "[concat('Microsoft.Sql/servers/resourcepools', parameters('resourcePoolName'))]"
+         "[concat('Microsoft.Sql/servers/resourcepools','/', parameters('resourcePoolName'))]"
       ],
       "name": "[concat(parameters('serverName'), '/', parameters('databases')[copyIndex()].databaseName)]",
       "type": "Microsoft.Sql/servers/databases",
