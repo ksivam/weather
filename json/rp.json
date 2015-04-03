@@ -16,16 +16,16 @@
       "defaultValue": "Standard"
     },
     "dtuGuarantee": {
-      "type": "string"
+      "type": "int"
     },
     "databaseDtuGuarantee": {
-      "type": "string"
+      "type": "int"
     },
     "databaseDtuCap": {
-      "type": "string"
+      "type": "int"
     },
     "storageLimitInGB": {
-      "type": "string"
+      "type": "int"
     },
     "databasesCount": {
       "type": "int"
