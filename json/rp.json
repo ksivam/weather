@@ -32,20 +32,16 @@
     },
     {
       "dependsOn": [
-        "provisionFirewallRules"
+         "[concat('Microsoft.Sql/servers/resourcepools', parameters('resourcePoolName'))]"
       ],
-      "name": "[concat(parameters('databases')[copyIndex()].serverName, '/', parameters('databases')[copyIndex()].databaseName)]",
-      "location": "[parameters('databases')[copyIndex()].serverLocation]",
+      "name": "[concat(parameters('serverName'), '/', parameters('databases')[copyIndex()].databaseName)]",
       "type": "Microsoft.Sql/servers/databases",
       "apiVersion": "2014-04-01-preview",
       "properties": {
-        "collation": "[parameters('databases')[copyIndex()].collation]",
-        "edition": "[parameters('databases')[copyIndex()].edition]",
-        "maxSizeBytes": "[parameters('databases')[copyIndex()].maxSizeBytes]",
-        "requestedServiceObjectiveId": "[parameters('databases')[copyIndex()].requestedServiceObjectiveId]"
+        "resourcePoolName": "[parameters('resourcePoolName')]"
       },
       "copy": {
-        "name": "provisionDatabases",
+        "name": "addExistingDatabasesToResourcePool",
         "count": "[parameters('databasesCount')]"
       }
     }
