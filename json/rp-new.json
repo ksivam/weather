@@ -1,1 +1,71 @@
 
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "serverName": {
+            "type": "string"
+        },
+        "serverLocation": {
+            "type": "string"
+        },
+        "elasticPoolName": {
+            "type": "string"
+        },
+        "edition": {
+            "type": "string",
+            "defaultValue": "Standard"
+        },
+        "dtuGuarantee": {
+            "type": "int"
+        },
+        "databaseDtuGuarantee": {
+            "type": "int"
+        },
+        "databaseDtuCap": {
+            "type": "int"
+        },
+        "storageLimitInGB": {
+            "type": "int"
+        },
+        "databasesCount": {
+            "type": "int"
+        },
+        "databases": {
+            "type": "array"
+        }
+    },
+    "variables": { },
+    "resources": [
+        {
+            "name": "[concat(parameters('serverName'), '/', parameters('elasticPoolName'))]",
+            "location": "[parameters('serverLocation')]",
+            "type": "Microsoft.Sql/servers/resourcepools",
+            "apiVersion": "2014-04-01-preview",
+            "properties": {
+                "edition": "[parameters('edition')]",
+                "dtuGuarantee": "[parameters('dtuGuarantee')]",
+                "databaseDtuGuarantee": "[parameters('databaseDtuGuarantee')]",
+                "databaseDtuCap": "[parameters('databaseDtuCap')]",
+                "storageLimitInGB": "[parameters('storageLimitInGB')]"
+            }
+        },
+        {
+            "dependsOn": [
+                "[concat('Microsoft.Sql/servers/', parameters('serverName') ,'/resourcepools/', parameters('elasticPoolName'))]"
+            ],
+            "name": "[concat(parameters('serverName'), '/', parameters('databases')[copyIndex()].databaseName)]",
+            "location": "[parameters('serverLocation')]",
+            "type": "Microsoft.Sql/servers/databases",
+            "apiVersion": "2014-04-01-preview",
+            "properties": {
+              "requestedServiceObjectiveId":"d1737d22-a8ea-4de7-9bd0-33395d2a7419",
+                "resourcePoolName": "[parameters('elasticPoolName')]"
+            },
+            "copy": {
+                "name": "addExistingDatabasesToElasticPool",
+                "count": "[parameters('databasesCount')]"
+            }
+        }
+    ]
+}
