@@ -31,6 +31,10 @@ setup- run as sudo or admin:
 - get db resource
 -- azure resource show Group-1 testausdb  Microsoft.Sql/servers/databases 2014-04-01-preview --parent servers/testausservert
 
+azure active directory login
+============================
+https://www.npmjs.com/package/adal-node
+
 Files which generates bearer token
 ==================================
 - lib/util/authentication/AccessTokenCloudCredentials.js
