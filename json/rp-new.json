@@ -62,7 +62,7 @@
             "type": "Microsoft.Sql/servers/databases",
             "apiVersion": "2014-04-01-preview",
             "properties": {
-                "edition": "standard",
+                "maxSizeBytes": "0",
                 "requestedServiceObjectiveId": "[parameters('requestedServiceObjectiveId')]",
                 "elasticPoolName": "[parameters('elasticPoolName')]"
             },
