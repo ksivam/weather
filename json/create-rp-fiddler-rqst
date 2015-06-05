@@ -41,25 +41,34 @@
           "type": "int",
           "defaultValue": 204800
       },      
-        "databases": {
+        "addDatabases": {
           "type": "array",
           "defaultValue": [
             {
-              "databaseName": "dsfs"
-            }
+              "databaseName": "a-1"
+            },
+            {
+              "databaseName": "a-2"
+            },
+            {
+              "databaseName": "a-3"
+            },
+            {
+            "databaseName":"dfgsdgs"
+            }            
           ]
         },
         "removeDatabases": {
           "type": "array",
           "defaultValue": [
             {
-              "databaseName": "a-1"
+            "databaseName":"dsfs"
             }
           ]
         },        
         "addDatabasesCount": {
           "type": "int",
-          "defaultValue": 1
+          "defaultValue": 4
         },
         "removeDatabasesCount": {
           "type": "int",
@@ -102,7 +111,7 @@
             "dependsOn": [
                 "[concat('Microsoft.Sql/servers/', parameters('serverName') ,'/elasticpools/', parameters('elasticPoolName'))]"
             ],
-            "name": "[concat(parameters('serverName'), '/', parameters('databases')[copyIndex()].databaseName)]",
+            "name": "[concat(parameters('serverName'), '/', parameters('addDatabases')[copyIndex()].databaseName)]",
             "location": "[parameters('serverLocation')]",
             "type": "Microsoft.Sql/servers/databases",
             "apiVersion": "2014-04-01-preview",
