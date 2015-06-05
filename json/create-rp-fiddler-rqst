@@ -35,7 +35,7 @@
       },
       "databaseDtuMax": {
           "type": "int",
-          "defaultValue": 100
+          "defaultValue": 50
       },
       "storageMB": {
           "type": "int",
@@ -45,18 +45,47 @@
           "type": "array",
           "defaultValue": [
             {
-              "databaseName": "a-1"
+              "databaseName": "dsfs"
             }
           ]
         },
-        "databasesCount": {
+        "removeDatabases": {
+          "type": "array",
+          "defaultValue": [
+            {
+              "databaseName": "a-1"
+            }
+          ]
+        },        
+        "addDatabasesCount": {
           "type": "int",
           "defaultValue": 1
-        }
+        },
+        "removeDatabasesCount": {
+          "type": "int",
+          "defaultValue": 1
+        }        
       },
       "variables": {},
       "resources": [
+      {
+        "name": "[concat(parameters('serverName'), '/', parameters('removeDatabases')[copyIndex()].databaseName)]",
+        "location": "[parameters('serverLocation')]",
+        "type": "Microsoft.Sql/servers/databases",
+        "apiVersion": "2014-04-01-preview",
+        "properties": {
+        "collation": "SQL_Latin1_General_CP1_CI_AS", 
+        "edition": "Standard",
+        "maxSizeBytes": "268435456000",
+        "requestedServiceObjectiveId": "f1173c43-91bd-4aaa-973c-54e79e15235b"            
+        },
+        "copy": {
+            "name": "removeExistingDatabasesToElasticPool",
+            "count": "[parameters('removeDatabasesCount')]"
+        }      
+      },
         {
+        "dependsOn": ["removeExistingDatabasesToElasticPool"],
             "name": "[concat(parameters('serverName'), '/', parameters('elasticPoolName'))]",
             "location": "[parameters('serverLocation')]",
             "type": "Microsoft.Sql/servers/elasticpools",
@@ -83,7 +112,7 @@
             },
             "copy": {
                 "name": "addExistingDatabasesToElasticPool",
-                "count": "[parameters('databasesCount')]"
+                "count": "[parameters('addDatabasesCount')]"
             }
         }
       ]
