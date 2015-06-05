@@ -35,13 +35,13 @@
       },
       "databaseDtuMax": {
           "type": "int",
-          "defaultValue": 50
+          "defaultValue": 100
       },
       "storageMB": {
           "type": "int",
           "defaultValue": 204800
       },      
-        "addDatabases": {
+        "removeDatabases": {
           "type": "array",
           "defaultValue": [
             {
@@ -58,7 +58,7 @@
             }            
           ]
         },
-        "removeDatabases": {
+        "addDatabases": {
           "type": "array",
           "defaultValue": [
             {
@@ -68,11 +68,11 @@
         },        
         "addDatabasesCount": {
           "type": "int",
-          "defaultValue": 4
+          "defaultValue": 1
         },
         "removeDatabasesCount": {
           "type": "int",
-          "defaultValue": 1
+          "defaultValue": 4
         }        
       },
       "variables": {},
