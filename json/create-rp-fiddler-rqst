@@ -1,0 +1,92 @@
+{
+  "properties": {
+    "mode": "Incremental",
+    "template": {
+      "$schema": "http://schemas.management.azure.com/deploymentTemplate?api-version=2015-01-01",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+      "serverName": {
+          "type": "string",
+          "defaultValue": "aaa-1"
+      },
+      "serverLocation": {
+          "type": "string",
+          "defaultValue": "Southeast Asia"
+      },
+      "elasticPoolName": {
+          "type": "string",
+          "defaultValue": "test-pool"
+      },
+      "edition": {
+          "type": "string",
+          "defaultValue": "Standard"
+      },
+      "requestedServiceObjectiveId": {
+          "type": "string",
+          "defaultValue": "d1737d22-a8ea-4de7-9bd0-33395d2a7419"
+      },
+      "poolDtu": {
+          "type": "int",
+          "defaultValue": 200
+      },
+      "databaseDtuMin": {
+          "type": "int",
+          "defaultValue": 0
+      },
+      "databaseDtuMax": {
+          "type": "int",
+          "defaultValue": 100
+      },
+      "storageMB": {
+          "type": "int",
+          "defaultValue": 204800
+      },      
+        "databases": {
+          "type": "array",
+          "defaultValue": [
+            {
+              "databaseName": "a-1"
+            }
+          ]
+        },
+        "databasesCount": {
+          "type": "int",
+          "defaultValue": 1
+        }
+      },
+      "variables": {},
+      "resources": [
+        {
+            "name": "[concat(parameters('serverName'), '/', parameters('elasticPoolName'))]",
+            "location": "[parameters('serverLocation')]",
+            "type": "Microsoft.Sql/servers/elasticpools",
+            "apiVersion": "2014-04-01-preview",
+            "properties": {
+                "edition": "[parameters('edition')]",
+                "dtu": "[parameters('poolDtu')]",
+                "databaseDtuMin": "[parameters('databaseDtuMin')]",
+                "databaseDtuMax": "[parameters('databaseDtuMax')]",
+                "storageMB": "[parameters('storageMB')]"
+            }
+        },
+        {
+            "dependsOn": [
+                "[concat('Microsoft.Sql/servers/', parameters('serverName') ,'/elasticpools/', parameters('elasticPoolName'))]"
+            ],
+            "name": "[concat(parameters('serverName'), '/', parameters('databases')[copyIndex()].databaseName)]",
+            "location": "[parameters('serverLocation')]",
+            "type": "Microsoft.Sql/servers/databases",
+            "apiVersion": "2014-04-01-preview",
+            "properties": {
+                "requestedServiceObjectiveId": "[parameters('requestedServiceObjectiveId')]",
+                "elasticPoolName": "[parameters('elasticPoolName')]"
+            },
+            "copy": {
+                "name": "addExistingDatabasesToElasticPool",
+                "count": "[parameters('databasesCount')]"
+            }
+        }
+      ]
+    }
+  }
+}
