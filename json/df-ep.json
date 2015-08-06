@@ -31,6 +31,10 @@
         "databasesCount": {
             "type": "int"
         },
+        "storageMB": {
+            "type": "int",
+            "defaultValue": "100"
+        },
         "databases": {
             "type": "array"
         }
